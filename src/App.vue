@@ -1,5 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterView } from "vue-router";
+import NavBar from "./shared/components/NavBar.vue";
+</script>
 
-<template></template>
+<template>
+  <div class="wrapper">
+    <header>
+      <!-- navBar  -->
+      <NavBar></NavBar>
+    </header>
+    <main>
+      <RouterView></RouterView>
+    </main>
+  </div>
+</template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+</style>
