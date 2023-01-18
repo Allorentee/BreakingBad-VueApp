@@ -41,6 +41,29 @@ La idea del layout separado por paginas es que cada pagina tendra su layout corr
     }
   ```
 
+**FORMAS DE CREAR RUTAS HIJAS**
+
+_En las rutas hijas no ponemos el path_
+
+- hacer rutas hijas podemos hacerlas en archivos separados y simplemente importarla en las rutas
+- Añadir app.addRouter(Characters)
+- Hacer una copia del objeto de la ruta y definir el path que asunque sea redundante se muestra sin tener que usar comentarios
+
+  ```
+  {
+    ...CharacterRouter,
+    path='/characters'
+  }
+  ```
+
+  **REDIRECT**
+
+- Formas de redireccionar hacia otro path cuando entramos en una ruta
+  ```
+  redirect: '/characters/list'
+  ```
+- IMPORTANTE: Sin el redirect hacia una pagina con una subpagina, no funcionan las rutas hijas, las rutas hijas solo funcionan si se acceden desde una url con dos path,es decir characters/list ahi se cambiara la ruta list por la que sea sin embargo, /characters no se podra navegar entre las diversas subrutas, marcara como qur nno las ha encontrado.
+
 **PROPS**
 
 Para pasar por props de un componente a otro hay que definirlas en el componente, podemos hacerlo en javascript con mucho codigo o con typescript en una linea con el uso de typado genericos o interfaces,
