@@ -1,22 +1,50 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import breakingBadApi from "../../api/breakingBad.api";
-import type { BreakingBadAPI } from "../../api/interface/api-interface";
+import rickAndMortyApi from "../../api/rickAndMorty.api";
+import type {
+  ApiInterface,
+  Character,
+} from "../../api/interface/api-interface";
 
-const characters = ref<BreakingBadAPI[]>([]);
+const characters = ref<Character[]>([]);
 
-breakingBadApi.get<BreakingBadAPI[]>("/v1/quotes/20").then((res) => {
-  characters.value = res.data;
+rickAndMortyApi.get<ApiInterface>("/character").then((res) => {
+  characters.value = res.data.results;
 });
 </script>
 
 <template>
-  <ul>
-    <li v-for="{ quote, author } of characters" :key="author">
-      <p>{{ quote }}</p>
-      <p>{{ author }}</p>
-    </li>
-  </ul>
+  <div class="cardWrapper">
+    <ul>
+      <li v-for="character of characters" :key="character.name">
+        <img :src="character.image" :alt="character.name" />
+        <p>{{ character.name }}</p>
+      </li>
+    </ul>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.cardWrapper {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+img {
+  width: 200px;
+  border-radius: 10px;
+}
+ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+li {
+  list-style-type: none;
+  text-align: center;
+}
+</style>

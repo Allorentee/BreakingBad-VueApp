@@ -3,8 +3,19 @@ import CardList from "../components/CardList.vue";
 const props = defineProps<{ tittle: string; visible: boolean }>();
 </script>
 <template>
-  <h2>{{ props.tittle }}</h2>
-  <CardList></CardList>
+  <div class="listWrapper">
+    <h2>{{ "Characters " + props.tittle }}</h2>
+    <div class="cardList">
+      <CardList></CardList>
+    </div>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.listWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+</style>

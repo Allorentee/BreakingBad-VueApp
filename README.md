@@ -103,6 +103,7 @@ breakingBadApi.get<BreakingBadAPI[]>("/characters")
 
 ## SUSPENSE
 
+Permite la ceaccion de componentes asyncronos.
 Existe el componente suspense, que espera a cargar el componente cuando este reciba la informacion de los datos y se puede ahorrar tanto codigo como esto.
 
 ```
