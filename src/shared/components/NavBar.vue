@@ -5,6 +5,7 @@ const props = defineProps<{ tittle: string; links: IRoutes[] }>();
 </script>
 <template>
   <nav>
+    <img src="./../../assets/logo.png" alt="Logo" />
     <span>{{ props.tittle }}</span>
     <RouterLink
       v-for="link of props.links"
@@ -17,20 +18,22 @@ const props = defineProps<{ tittle: string; links: IRoutes[] }>();
 
 <style scoped>
 nav {
+  padding: 20px;
   width: 100;
   font-size: 1rem;
   text-align: center;
   margin-top: 10px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 a {
-  margin-right: 5px;
+  margin-right: 15px;
 }
 img {
   margin-right: 5px;
+  width: 40px;
 }
 span {
-  margin-right: 10px;
+  margin: 0px 20px;
 }
 </style>
