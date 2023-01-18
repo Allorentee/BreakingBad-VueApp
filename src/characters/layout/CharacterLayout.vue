@@ -16,7 +16,9 @@ const routerLinks: IRoutes[] = characterRoutes
 <template>
   <h1>Characters Page</h1>
   <NavBar :show-icon="false" :links="routerLinks"></NavBar>
-  <RouterView></RouterView>
+  <Suspense>
+    <RouterView></RouterView>
+  </Suspense>
 </template>
 
 <style scoped></style>
