@@ -12,7 +12,6 @@ const routerLinks: IRoutes[] = characterRoutes
       name: route.name as string,
     };
   });
-console.log(routerLinks);
 </script>
 <template>
   <h1>Characters Page</h1>

@@ -69,3 +69,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.router-link-active {
+  color: #42b883;
+}
+.router-link-exact-active {
+  color: lightgreen;
+}
