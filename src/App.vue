@@ -1,7 +1,5 @@
-<script lang="ts" src="./index.ts"></script>
+<script setup lang="ts"></script>
 
-<template>
-  <div>Pagina Principal</div>
-</template>
+<template></template>
 
 <style scoped></style>

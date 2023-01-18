@@ -27,3 +27,16 @@ vbase-3-ts-setup
 **LAYOUT**
 
 La idea del layout separado por paginas es que cada pagina tendra su layout correspondiente.
+
+**ROUTES**
+
+- **history** : Como queremos crear las rutas. el createwebHashHistory crea las rutas con un hash
+- history: createWebHistory(import.meta.env.BASE_URL), -> Poder especificar cual es la ruta base donde encontramos todo.
+- **Lazy Loading**: Rutas Lazy
+  ```
+    {
+      path: "/characters",
+      name: "characters",
+      component: () => import("../characters/layout/CharacterLayout.vue"),
+    }
+  ```
