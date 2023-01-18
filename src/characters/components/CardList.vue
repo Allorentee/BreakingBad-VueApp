@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import rickAndMortyApi from "../../api/rickAndMorty.api";
-import type {
-  ApiInterface,
-  Character,
-} from "../../api/interface/api-interface";
+// import { ref } from "vue";
+// import rickAndMortyApi from "../../api/rickAndMorty.api";
+// import type {
+//   ApiInterface,
+//   Character,
+// } from "../../api/interface/api-interface";
+import { useCharacters } from "../composable/useCharacters";
 
-const characters = ref<Character[]>([]);
-
-rickAndMortyApi.get<ApiInterface>("/character").then((res) => {
-  characters.value = res.data.results;
-});
+const { characters, isLoading } = useCharacters();
 </script>
 
 <template>
   <div class="cardWrapper">
+    <h1 v-if="isLoading">Loading...</h1>
     <ul>
       <li v-for="character of characters" :key="character.name">
         <img :src="character.image" :alt="character.name" />

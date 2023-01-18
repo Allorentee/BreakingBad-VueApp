@@ -28,6 +28,11 @@ vbase-3-ts-setup
 
 La idea del layout separado por paginas es que cada pagina tendra su layout correspondiente.
 
+**REACTIVE & REF**
+
+-reactive solo funciona con objetos y arrays
+-ref funciona con todo tipo de datos.
+
 # ROUTES
 
 - **history** : Como queremos crear las rutas. el createwebHashHistory crea las rutas con un hash
@@ -115,5 +120,82 @@ Cuando nosotros queremos guardar la data en una variable que no sea reactiva, po
 
 ```
 const { data: characters } = await breakingBadApi.get<BreakingBadAPI[]>("/characters")
+
+```
+
+## COMPOSABLE FUNCTIONS
+
+Muy parecido a los customHooks de react
+
+### ESTADO LOCAL
+
+Separamos la logia con las variables reactivas en un componente aparte y devolvemos un objeto con estas variables, a la hora de llamarlas dentro del componente desestructuramos const { characters, isLoading } = useCharacters
+
+```
+import { ref } from "vue";
+import { ApiInterface, Character } from "../../api/interface/api-interface";
+import rickAndMortyApi from "../../api/rickAndMorty.api";
+
+export const useCharacters = () => {
+  const characters = ref<Character[]>([]);
+  const isLoading = ref<boolean>(true);
+
+  rickAndMortyApi.get<ApiInterface>("/character").then((res) => {
+    characters.value = res.data.results;
+    isLoading.value = false;
+  });
+
+  return {
+    characters,
+    isLoading,
+  };
+};
+
+```
+
+### ESTADO GLOBAL
+
+Para que tenga un estado global en la aplicaciony opor ejemplo no vuelva a hacer llamadas que no son necesarias guardando la data en un estado global.
+
+Ejemplo de un estado global, sacamos las variables a alcance global, estas no infieren con otras variables de alcance global que se llamen igual vue gestiona eso y y lo qe hacemos es una vez se monta el componente ejecutar la funcion esta comprueba si ya hemos recogido personajes anteriormente y si es asi no vuelve a hacer la carga de datos.
+
+```
+import { onMounted, ref } from "vue";
+
+import { ApiInterface, Character } from "../../api/interface/api-interface";
+import rickAndMortyApi from "../../api/rickAndMorty.api";
+
+const characters = ref<Character[]>([]);
+const isLoading = ref<boolean>(true);
+const hasError = ref<boolean>(false);
+const errorMessage = ref<string>();
+
+export const useCharacters = () => {
+  onMounted(() => {
+    loadCharacters();
+  });
+
+  const loadCharacters = () => {
+    if (characters.value.length > 0) return;
+    isLoading.value = true;
+
+    try {
+      rickAndMortyApi.get<ApiInterface>("/character").then((res) => {
+        characters.value = res.data.results;
+        isLoading.value = false;
+      });
+    } catch (error) {
+      hasError.value = true;
+      errorMessage.value = "error";
+    }
+  };
+
+  return {
+    characters,
+    isLoading,
+    hasError,
+    errorMessage,
+  };
+};
 
 ```

@@ -8,7 +8,7 @@ import { appRoutes } from "./router/link-routes";
   <div class="wrapper">
     <header>
       <!-- navBar  -->
-      <NavBar tittle="BreakingBad" :links="appRoutes" show-icon></NavBar>
+      <NavBar tittle="RickAndMorty" :links="appRoutes" show-icon></NavBar>
     </header>
     <main>
       <RouterView></RouterView>

@@ -11,7 +11,7 @@ const props = withDefaults(
 </script>
 <template>
   <nav>
-    <img v-if="showIcon" src="./../../assets/logo.png" alt="Logo" />
+    <img v-if="showIcon" src="./../../assets/image.png" alt="Logo" />
     <span>{{ props.tittle }}</span>
     <RouterLink
       v-for="link of props.links"
@@ -37,7 +37,7 @@ a {
 }
 img {
   margin-right: 5px;
-  width: 40px;
+  width: 50px;
 }
 span {
   margin: 0px 20px;
