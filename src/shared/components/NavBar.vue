@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { IRoutes } from "../../router/link-routes";
 
-const props = defineProps<{ tittle: string; links: IRoutes[] }>();
+const props = withDefaults(
+  defineProps<{ tittle?: string; links: IRoutes[]; showIcon: boolean }>(),
+  {
+    showIcon: true,
+    links: () => [],
+  }
+);
 </script>
 <template>
   <nav>
-    <img src="./../../assets/logo.png" alt="Logo" />
+    <img v-if="showIcon" src="./../../assets/logo.png" alt="Logo" />
     <span>{{ props.tittle }}</span>
     <RouterLink
       v-for="link of props.links"
