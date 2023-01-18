@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <h1>Characters Page</h1>
 </template>
 
 <script setup lang="ts"></script>

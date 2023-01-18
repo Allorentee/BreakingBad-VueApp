@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import NavBar from "./shared/components/NavBar.vue";
+import { appRoutes } from "./router/link-routes";
 </script>
 
 <template>
   <div class="wrapper">
     <header>
       <!-- navBar  -->
-      <NavBar></NavBar>
+      <NavBar tittle="BreakingBad" :links="appRoutes"></NavBar>
     </header>
     <main>
       <RouterView></RouterView>

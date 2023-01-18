@@ -1,10 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { IRoutes } from "../../router/link-routes";
+
+const props = defineProps<{ tittle: string; links: IRoutes[] }>();
+</script>
 <template>
   <nav>
-    <img src="./../../assets/Logo.png" alt="Logo-Menu" />
-    <span>Algo</span>
-    <RouterLink to="/">Inicio</RouterLink>
-    <RouterLink to="/about">About</RouterLink>
+    <span>{{ props.tittle }}</span>
+    <RouterLink
+      v-for="link of props.links"
+      :key="link.tittle"
+      :to="link.path"
+      >{{ link.tittle }}</RouterLink
+    >
   </nav>
 </template>
 

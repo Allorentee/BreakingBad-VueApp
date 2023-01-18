@@ -40,3 +40,26 @@ La idea del layout separado por paginas es que cada pagina tendra su layout corr
       component: () => import("../characters/layout/CharacterLayout.vue"),
     }
   ```
+
+**PROPS**
+
+Para pasar por props de un componente a otro hay que definirlas en el componente, podemos hacerlo en javascript con mucho codigo o con typescript en una linea con el uso de typado genericos o interfaces,
+
+```
+<!-- JS -->
+
+const props = defineProps({
+  tittle: {
+    type: String,
+    required: true,
+    default: 'DefaulT'
+  }
+})
+
+<!-- ts -->
+
+const  props = defineProps<{tittle: String}>()
+
+<!-- Cuando hay mas de tres props se recomienda el uso de interfaces. -->
+
+```
