@@ -11,7 +11,10 @@ import { appRoutes } from "./router/link-routes";
       <NavBar tittle="RickAndMorty" :links="appRoutes" show-icon></NavBar>
     </header>
     <main>
+      <!-- Route view + suspense -->
+      <!-- <Suspense> -->
       <RouterView></RouterView>
+      <!-- </Suspense> -->
     </main>
   </div>
 </template>

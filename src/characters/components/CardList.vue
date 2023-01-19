@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
-import { ApiInterface, Character } from "../../api/interface/api-interface";
-import rickAndMortyApi from "../../api/rickAndMorty.api";
-import { useCharacters } from "../composable/useCharacters";
+import { toRef } from "vue";
+import type { Character } from "../../api/interface/api-interface";
 import CardItem from "./CardItem.vue";
 //! SUSPENSE
 //Debemos colocar el <Suspense> para que este componente sea asyncrono.
@@ -16,34 +14,37 @@ import CardItem from "./CardItem.vue";
 //! TANSTACK QUERY
 //Lo que hemos creado antes con el composable function lo acabamos de recoger desde la libreria tanQuery
 
-const apiSlowCall = async (): Promise<Character[]> => {
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      const { data } = await rickAndMortyApi.get<ApiInterface>("/character");
-      resolve(data.results);
-    }, 1000);
-  });
-};
+// const apiSlowCall = async (): Promise<Character[]> => {
+//   return new Promise((resolve) => {
+//     setTimeout(async () => {
+//       const { data } = await rickAndMortyApi.get<ApiInterface>("/character");
+//       resolve(data.results);
+//     }, 1000);
+//   });
+// };
 
-const {
-  isLoading,
-  isError,
-  //Renombrar una propiedad de un objeto en la desestructuracion.
-  data: characters,
-  error,
-} = useQuery(["characters"], apiSlowCall, {
-  cacheTime: 1000,
-  // refetchOnReconnect: "always",
-});
+// const {
+//   isLoading,
+//   isError,
+//   //Renombrar una propiedad de un objeto en la desestructuracion.
+//   data: characters,
+//   error,
+// } = useQuery(["characters"], apiSlowCall, {
+//   cacheTime: 1000,
+//   // refetchOnReconnect: "always",
+// });
+
+const props = defineProps<{ char: Character[]; load: boolean }>();
+const characters = toRef(props, "char");
 </script>
 
 <template>
   <div class="cardWrapper">
-    <h1 v-if="isLoading">Loading...</h1>
+    <h1 v-if="load">Loading...</h1>
     <CardItem
       v-for="character of characters"
       :key="character.name"
-      :character="character"
+      :char="character"
     ></CardItem>
   </div>
 </template>

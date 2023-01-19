@@ -4,9 +4,9 @@ import { Character } from "../../api/interface/api-interface";
 
 //Para pasar las props de un  componente a otro podemos crear una interface o podemos definir lo que nos llega en el tipado de define props directamente,
 //No podemos desestructurar el objeto props y traernos solo characters asi { characters } porque perderia la reactividad.
-const props = defineProps<{ character: Character }>();
+const props = defineProps<{ char: Character }>();
 //Para hacer a una propiedad de un objeto reactiva usamos la palabra toRef() 1º P - Nombre del objeto, 2º P Nombre de la propiedad que queremos hacer reactiva.
-const character = toRef(props, "character");
+const character = toRef(props, "char");
 </script>
 <template>
   <ul>
