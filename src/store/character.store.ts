@@ -25,11 +25,18 @@ const characterStore = reactive<Store>({
     errorMessage: "",
     hasErro: false,
   },
-  startLoadingCharacters() {
-    console.log("Start Store");
+  startLoadingCharacters() {},
+  loadCharacters(data: Character[]) {
+    //Estamos igualando la propiedad characters del store a un nuevo objeto con las propiedades actualizadas.
+    this.characters = {
+      count: data.length,
+      isLoading: false,
+      errorMessage: "",
+      hasErro: false,
+      //Desestructuramos la data para asegurarnos que es un nuevo elemento y evitar paso por referencia.
+      list: [...data],
+    };
   },
-  loadCharacters(data: Character[]) {},
   loadCharacterFail(error: string) {},
 });
-
 export default characterStore;

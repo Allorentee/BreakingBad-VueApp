@@ -6,19 +6,21 @@ import characterStore from "../../store/character.store";
 import CardList from "../components/CardList.vue";
 const props = defineProps<{ tittle: string; visible: boolean }>();
 
-// const apiCall = async (): Promise<Character[]> => {
-//   const { data } = await rickAndMortyApi.get<ApiInterface>("/character");
-//   return data.results;
-// };
+const apiCall = async (): Promise<Character[]> => {
+  const { data } = await rickAndMortyApi.get<ApiInterface>("/character");
+  return data.results;
+};
 
-// const {
-//   isLoading,
-//   isError,
-//   error,
-//   data: characters,
-// } = useQuery(["characters"], apiCall);
-
-characterStore.characters;
+const {
+  isLoading,
+  isError,
+  error,
+  data: characters,
+} = useQuery(["characters"], apiCall, {
+  onSuccess: (data) => {
+    characterStore.loadCharacters(data);
+  },
+});
 </script>
 <template>
   <div class="listWrapper">

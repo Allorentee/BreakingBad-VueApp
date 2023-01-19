@@ -5,6 +5,9 @@ import router from "./router";
 import { VueQueryPlugin } from "@tanstack/vue-query";
 const app = createApp(App);
 
+//! SOLO CON LA IMPORTACION YA CONSTRUYE EL STORE.
+import "./store/character.store";
+
 //Podemos establecerle configuraciones para hacer que el use query trabaje con todas estas por defecto.
 //Puede manejar el cache por nosotros, en la memoria del navegador web crea espacios y guarda la informacion en la cache del navegador
 // app.use(VueQueryPlugin);
