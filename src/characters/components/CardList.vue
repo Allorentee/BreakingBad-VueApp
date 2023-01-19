@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/vue-query";
 import { ApiInterface, Character } from "../../api/interface/api-interface";
 import rickAndMortyApi from "../../api/rickAndMorty.api";
 import { useCharacters } from "../composable/useCharacters";
+import CardItem from "./CardItem.vue";
 //! SUSPENSE
 //Debemos colocar el <Suspense> para que este componente sea asyncrono.
 //? Para objetos no reactivos renombramos el nombre de la data asi -> {data: characters}
@@ -31,7 +32,7 @@ const {
   data: characters,
   error,
 } = useQuery(["characters"], apiSlowCall, {
-  cacheTime: 1000 * 60,
+  cacheTime: 1000,
   // refetchOnReconnect: "always",
 });
 </script>
@@ -39,12 +40,11 @@ const {
 <template>
   <div class="cardWrapper">
     <h1 v-if="isLoading">Loading...</h1>
-    <ul>
-      <li v-for="character of characters" :key="character.name">
-        <img :src="character.image" :alt="character.name" />
-        <p>{{ character.name }}</p>
-      </li>
-    </ul>
+    <CardItem
+      v-for="character of characters"
+      :key="character.name"
+      :character="character"
+    ></CardItem>
   </div>
 </template>
 
@@ -56,19 +56,5 @@ const {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
-img {
-  width: 200px;
-  border-radius: 10px;
-}
-ul {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-li {
-  list-style-type: none;
-  text-align: center;
 }
 </style>
