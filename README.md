@@ -199,3 +199,29 @@ export const useCharacters = () => {
 };
 
 ```
+
+# Tank Stack Query
+
+Puede manejar el cache por nosotros, en la memoria del navegador web crea espacios y guarda la informacion en la cache del navegador
+Podemos establecerle configuraciones para hacer que el use query trabaje con todas estas por defecto.
+
+```
+app.use(VueQueryPlugin);
+```
+
+//! TANSTACK QUERY
+//Lo que hemos creado antes con el composable function lo acabamos de recoger desde la libreria tanQuery
+
+`````const apiSlowCall = async () => {
+  const { data } = await rickAndMortyApi.get<ApiInterface>("/character");
+  return data.results;
+};
+
+const {
+  isLoading,
+  isError,
+  //Renombrar una propiedad de un objeto en la desestructuracion.
+  data: characters,
+  error,
+} = useQuery(["characters"], apiSlowCall);````
+`````
