@@ -249,3 +249,30 @@ const character = toRef(props, "character");
   </ul>
 </template>
 ```
+
+## SOLUCIONAR ERRORES DE LA API
+
+Para soluccionar errores que nos trae la api es recompendable hacerlo en la llamada porque si lo haccwemos ene l coponente, se vuelve a evaluar.
+
+`````const apiSlowCall = async () => {
+  const { data } = await rickAndMortyApi.get<ApiInterface>("/character");
+  return data.results.filter(character => [14,17,32].includes(character.id));
+};
+
+const {
+  isLoading,
+  isError,
+  //Renombrar una propiedad de un objeto en la desestructuracion.
+  data: characters,
+  error,
+} = useQuery(["characters"], apiSlowCall);````
+`````
+
+# STORE
+
+- Manejo de informacion descentralizada, global a la aplicacion
+
+# STORE REACTIVO PROPIO DE VUE
+
+- No ecesitas dependencias de terceros.
+- Recomendacion con typescript trabajarlo con una interface que se llame State
